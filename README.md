@@ -1,28 +1,33 @@
-JFrog Home Assignment - Spring PetClinic Jenkins Pipeline
-Overview
+# JFrog Home Assignment - Spring PetClinic Jenkins Pipeline
+
+## Overview
 
 This repository contains my implementation of the JFrog home assignment using Spring PetClinic as the source application.
 
 The Jenkins pipeline performs the following steps:
 
-Checks out the source code from GitHub
-Configures Maven dependency resolution through JCenter
-Compiles the application
-Runs tests
-Packages the Spring Boot application
-Builds a runnable Docker image
-Saves the Docker image as a compressed artifact
-Repository Contents
-Jenkinsfile - Jenkins declarative pipeline
-Dockerfile - Docker image definition
-README.md - Assignment instructions and runbook
-pom.xml / src/ - Spring PetClinic application source
-Jenkins Pipeline
+1. Checks out the source code from GitHub
+2. Configures Maven dependency resolution through JCenter
+3. Compiles the application
+4. Runs tests
+5. Packages the Spring Boot application
+6. Builds a runnable Docker image
+7. Saves the Docker image as a compressed artifact
 
-The pipeline is defined in Jenkinsfile.
+## Repository Contents
+
+- `Jenkinsfile` - Jenkins declarative pipeline
+- `Dockerfile` - Docker image definition
+- `README.md` - Assignment instructions and runbook
+- `pom.xml` / `src/` - Spring PetClinic application source
+
+## Jenkins Pipeline
+
+The pipeline is defined in `Jenkinsfile`.
 
 Pipeline stages:
 
+```text
 Checkout
 Configure Maven to use JCenter
 Compile
@@ -30,68 +35,95 @@ Test
 Package
 Build Docker Image
 Save Docker Image
+```
 
 A successful Jenkins run produces an archived Docker image artifact:
 
+```text
 dist/spring-petclinic-<build-number>.tar.gz
+```
 
 For this submission, the generated Docker image artifact is:
 
+```text
 spring-petclinic-4.tar.gz
-Dependency Resolution
+```
+
+## Dependency Resolution
 
 The pipeline configures Maven to resolve dependencies using JCenter:
 
+```text
 https://jcenter.bintray.com/
+```
 
 Note: JCenter is deprecated/sunset. This configuration was added to satisfy the assignment requirement. In a production environment, I would prefer using JFrog Artifactory as a remote repository/proxy in front of Maven Central or any required upstream repositories.
 
-Running the Attached Docker Image
+## Running the Attached Docker Image
 
 Load the attached Docker image:
 
+```bash
 docker load < spring-petclinic-4.tar.gz
+```
 
 Run the container:
 
+```bash
 docker run --rm -p 8081:8080 spring-petclinic:4
+```
 
 Open the application:
 
+```text
 http://localhost:8081
+```
 
-The application listens on port 8080 inside the container. Port 8081 is used locally to avoid conflicting with Jenkins running on port 8080.
+The application listens on port `8080` inside the container. Port `8081` is used locally to avoid conflicting with Jenkins running on port `8080`.
 
-Running Locally from Source
+## Running Locally from Source
 
 Build the Spring Boot application:
 
+```bash
 ./mvnw clean package -DskipTests
+```
 
 Build the Docker image:
 
+```bash
 docker build -t spring-petclinic:local .
+```
 
 Run the Docker image:
 
+```bash
 docker run --rm -p 8081:8080 spring-petclinic:local
+```
 
 Open the application:
 
+```text
 http://localhost:8081
-Jenkins Setup Used
+```
+
+## Jenkins Setup Used
 
 This assignment was tested using Jenkins running locally in Docker with access to the Docker socket so that the pipeline can build Docker images.
 
 Required Jenkins plugins:
 
-Pipeline
-Git
-GitHub Branch Source
-JUnit
-Build Result
+- Pipeline
+- Git
+- GitHub Branch Source
+- JUnit
+
+## Build Result
 
 The Jenkins pipeline completed successfully and produced a runnable Docker image artifact.
+
+---
+
 # Spring PetClinic Sample Application [![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)[![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/spring-projects/spring-petclinic) [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=7517918)
