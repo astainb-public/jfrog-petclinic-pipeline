@@ -1,3 +1,41 @@
+# JFrog Home Assignment - Spring PetClinic Jenkins Pipeline
+
+## Overview
+
+This repository contains my implementation of the JFrog home assignment using Spring PetClinic as the source application.
+
+The Jenkins pipeline performs the following steps:
+
+1. Checks out the source code from GitHub
+2. Configures Maven dependency resolution through JCenter
+3. Compiles the application
+4. Runs tests
+5. Packages the Spring Boot application
+6. Builds a runnable Docker image
+7. Saves the Docker image as a compressed artifact
+
+## Repository Contents
+
+- `Jenkinsfile` - Jenkins declarative pipeline
+- `Dockerfile` - Docker image definition
+- `README.md` - Assignment instructions and runbook
+- `pom.xml` / `src/` - Spring PetClinic application source
+
+## Jenkins Pipeline
+
+The pipeline is defined in `Jenkinsfile`.
+
+Stages:
+
+```text
+Checkout
+Configure Maven to use JCenter
+Compile
+Test
+Package
+Build Docker Image
+Save Docker Image
+
 # Spring PetClinic Sample Application [![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)[![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/spring-projects/spring-petclinic) [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=7517918)
